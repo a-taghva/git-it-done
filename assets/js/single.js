@@ -1,3 +1,5 @@
+let limitWarningEl = document.getElementById("limit-warning");
+
 function getRepoIssues(repo) {
     let apiUrl = `https://api.github.com/repos/${repo}/issues?direction=asc`;
 
@@ -7,7 +9,12 @@ function getRepoIssues(repo) {
             response.json()
             .then( (data) => {
                 displayIssues(data);
-            })
+
+                // check if api has paginated issues
+                if (response.headers.get("Link")) {
+                    displayWarning(repo);
+                };
+            });
         } else {
             alert("There was a problem wit your request!");
         }
@@ -51,4 +58,14 @@ function displayIssues(issues) {
     }
 }
 
-getRepoIssues("a-taghva/portfolio");
+function displayWarning(repo) {
+    let linkEl = document.createElement("a");
+    linkEl.textContent = "See More Issues on GitHub.com";
+    linkEl.setAttribute("href", `https://github.com/${repo}/issues`);
+    linkEl.setAttribute("target", "_blank");
+
+    limitWarningEl.textContent = "To see more than 30 issues visit ";
+    limitWarningEl.appendChild(linkEl);
+}
+
+getRepoIssues("facebook/react");
