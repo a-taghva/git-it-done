@@ -76,7 +76,7 @@ p {
   outline: none;
   background-color: var(--light-dark);
   box-shadow: 3px 3px var(--secondary);
-  transform: translate(-1px, -1px);
+  /* transform: translate(-1px, -1px); */
   display: inline-block;
   width: auto;
   margin-top: 20px;
@@ -88,7 +88,7 @@ p {
  .btn-back:hover {
   color: var(--primary);
   background-color: var(--tertiary);
-  transform: translate(0, 0);
+  transform: translate(1px, 1px);
   box-shadow: 2px 2px var(--dark);
 }
 
