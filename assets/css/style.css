@@ -59,6 +59,7 @@ p {
 }
 
 .btn:hover {
+  cursor: pointer;
   color: var(--primary);
   background-color: var(--tertiary);
   transform: translate(0, 0);
