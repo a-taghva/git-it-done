@@ -7,8 +7,7 @@ function getRepoIssues(repo) {
     fetch(apiUrl)
     .then( (response) => {
         if(response.ok) {
-            response.json()
-            .then( (data) => {
+            response.json().then( (data) => {
                 displayIssues(data);
 
                 // check if api has paginated issues
@@ -17,7 +16,7 @@ function getRepoIssues(repo) {
                 };
             });
         } else {
-            alert("There was a problem wit your request!");
+            document.location.replace("./index.html");
         }
     });
 }
@@ -70,10 +69,17 @@ function displayWarning(repo) {
 }
 
 function getRepoName() {
+    // gragb repo name from url query string
     let queryString = document.location.search;
     let repoName = queryString.split("=")[1];
-    repoNameEl.textContent = repoName;
-    getRepoIssues(repoName);
+
+    if (repoName) {
+        repoNameEl.textContent = repoName;
+        getRepoIssues(repoName);
+    } else { 
+        // if no repo was given, redirect to the homepage
+        document.location.replace("./index.html");
+    };
 }
 
 getRepoName();
