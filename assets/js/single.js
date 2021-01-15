@@ -1,4 +1,5 @@
 let limitWarningEl = document.getElementById("limit-warning");
+let repoNameEl = document.getElementById("repo-name");
 
 function getRepoIssues(repo) {
     let apiUrl = `https://api.github.com/repos/${repo}/issues?direction=asc`;
@@ -68,4 +69,11 @@ function displayWarning(repo) {
     limitWarningEl.appendChild(linkEl);
 }
 
-getRepoIssues("facebook/react");
+function getRepoName() {
+    let queryString = document.location.search;
+    let repoName = queryString.split("=")[1];
+    repoNameEl.textContent = repoName;
+    getRepoIssues(repoName);
+}
+
+getRepoName();
